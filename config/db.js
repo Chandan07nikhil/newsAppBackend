@@ -1,6 +1,11 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://9891cky:47Aze6miycofAWzM@cluster0.rukyp.mongodb.net/yourDatabaseName?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error("MongoDB URI is not defined");
+}
 
 mongoose.connect(uri)
   .then(() => console.log('Connected to MongoDB'))
